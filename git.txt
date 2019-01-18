@@ -1,0 +1,51 @@
+Git：分布式版本控制系统
+1、git init: 初始化一个git仓库（会多出一个.git目录，版本库，是Git跟踪管理版本库的），仓库一般意义上指一个工程项目
+注：工作区-暂存区（stage or index目录，add后）-HEAD（当前最新版本，commit后）
+2、git add <file>: 添加文件（git add . 一次性添加所有文件）
+注：git add -f <file>: 强制添加文件
+3、git commit -m "remark": 提交到本地仓库
+4、git status: 查看工作区当前的状态，如是否有文件被修改过
+5、git diff <file>: 查看工作区和暂存区file的区别
+注：git diff --cache: 查看暂存区和分支的区别
+	git diff HEAD -- <file>: 查看工作区和最新版本库的区别
+6、git log: 查看从最近到最远的提交记录（--pretty=oneline 简化输出信息）
+注：git log --graph: 可以看到分支合并图
+7、git reset --hard HEAD^: 回退到某个版本（HEAD是当前版本，HEAD^是上个版本，HEAD^^是上上版本，HEAD~100是上100个版本）
+注：git reset --hard 提交commitId前几位数:  回到未来的版本（回退到之前版本后，未关闭窗口可找到commitId时）
+8、git reflog: 记录每一次的命令（当回退后关闭窗口找不到commitId后）
+9、git checkout -- <file>: 丢弃工作区的修改，让file回到最近一次git commit或git add时的状态
+10、git reset HEAD <file>: 把暂存区的修改撤销掉（unstage），重新放回工作区
+11、git rm <file>: 删除一个文件
+12、git remote add origin https://github.com/teelaGithub/mq.git: 将本地库与远程库关联，远程库的名字默认是origin
+13、git push -u origin <branch>: 把本地库的内容推送到远程（第一次推送master分支时，加上了-u参数，Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令）
+14、git clone git@github.com:teelaGithub/mq.git: 克隆远程库（默认的git://使用ssh，也可用HTTPS等其他协议）
+15、git checkout -b <newbranch>: 新建分支并切换到新分支（本地），即git branch <newbranch>，git checkout <newbranch>
+注：git checkout -b <newbranch> <remote，如origin/dev>: 在本地创建和远程分支对应的分支（将远程分支在本地关联新建并切换）
+16、git branch: 列出本地所有分支（git branch -a 列出含远程的所有分支）
+注：git branch -d <branch>: 删除分支
+	git branch -D <branch>: 强制删除一个没有被合并过的分支
+	git branch --set-upstream-to=origin/<branch> <branch>: 将本地分支与远程分支关联起来
+17、git merge <branch>: 合并指定分支到当前分支
+注：git merge --no-ff -m "remark" <branch>: --no-ff参数，表示禁用Fast forward，因为本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去
+18、git stash: 把当前分支的修改隐藏起来
+注：git stash list: 查看隐藏的修改信息
+	git stash apply <stash_name>: 恢复隐藏内容（可指定恢复），但是恢复后，stash内容并不删除，你需要用git stash drop来删除
+	git stash pop: 恢复的同时把stash内容也删了
+19：git remote: 查看远程信息
+注：git remote -v: 详细远程信息，可抓取和可推送的地址
+20、git rebase: 可以把本地未push的分叉提交历史整理成直线,使得我们在查看历史提交的变化时更容易，因为分叉的提交需要三方对比，缺点是本地的分叉提交已经被修改过了
+21、git tag: 查看标签，按字母排序
+注：git show <tagname>: 查看标签详情
+	git tag <tagname>: 新建一个本地标签（如v1.0），在最新commit上
+	git tag <tagname> <commitid>: 在指定commit上打本地标签
+	git tag -a <tagname> -m "remark" <commitid>: -a指定标签名，-m指定标签说明信息
+	git tag -d <tagname>: 删除本地标签
+	git push origin :refs/tags/<tagname>: 删除远程标签
+	git push origin <tagname>: 推送本地标签至远程
+	git push origin --tags: 推送所有本地标签至远程
+22、git config --global color.ui true: 命令信息颜色个性化
+注：ssh -keygen -t rsa -C "youremail@example.com": 创建ssh
+	git config --global user.name="xxx": 设置git提交时记录的用户
+	git config --global user.email="xxx"
+	git config --global alias.st status: 为status取别名，即git st相当于git status
+	
