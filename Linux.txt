@@ -159,3 +159,43 @@ var：存放着在不断扩充着的东西，我们习惯将那些经常被修�
 	最后的& 指让命令在后台执行
 	0-键盘输出，1-屏幕输出，2-错误输出
 	
+34、find path expression: 查找文件
+例：find / -name '*test*'：在根目录/查找文件名含test的文件
+注：-amin -10：查找在系统中最后10分钟访问的文件(access time)
+	-atime -2：查找在系统中最后48小时访问的文件
+	-empty：查找在系统中为空的文件或者文件夹
+	-group cat：查找在系统中属于 group为cat的文件
+	-mmin -5：查找在系统中最后5分钟里修改过的文件(modify time)
+	-mtime -1：查找在系统中最后24小时里修改过的文件
+	-user fred：查找在系统中属于fred这个用户的文件
+	-size +10000c：查找出大于10000000字节的文件(c:字节，w:双字，k:KB，M:MB，G:GB)
+	-size -1000k：查找出小于1000KB的文件
+	>>>>混合查找参数有： ！，-and(-a)，-or(-o)
+		例：find /tmp -size +10000c -and -mtime +2：在/tmp目录下查找大于10000字节并在最后2分钟内修改的文件
+			find / -user fred -or -user george：在/目录下查找用户是fred或者george的文件文件
+			find /tmp ! -user panda：在/tmp目录中查找所有不属于panda用户的文件
+35、grep pattern path_expression：查找内容
+1)[options]主要参数
+	-c：只输出匹配行的计数。
+　　-i：不区分大小写
+　　-h：查询多文件时不显示文件名。
+　　-l：查询多文件时只输出包含匹配字符的文件名。
+　　-n：显示匹配行及行号。
+　　-s：不显示不存在或无匹配文本的错误信息。
+　　-v：显示不包含匹配文本的所有行
+2)pattern正则表达式主要参数
+	\： 忽略正则表达式中特殊字符的原有含义。
+　　^：匹配正则表达式的开始行。
+　　$: 匹配正则表达式的结束行。
+　　\<：从匹配正则表达 式的行开始。
+　　\>：到匹配正则表达式的行结束。
+　　[ ]：单个字符，如[A]即A符合要求 。
+　　[ - ]：范围，如[A-Z]，即A、B、C一直到Z都符合要求 。
+　　.：所有的单个字符。
+　　* ：有字符，长度可以为0
+例：grep 'test' d*：显示所有以d开头的文件中包含 test的行
+　　grep ‘test’ aa bb cc：显示在aa，bb，cc文件中包含test的行
+　　grep ‘[a-z]\{5\}’ aa：显示所有包含每行字符串至少有5个连续小写字符的字符串的行
+　　grep magic /usr/src：显示/usr/src目录下的文件(不含子目录)包含magic的行
+　　grep -r magic /usr/src：显示/usr/src目录下的文件(包含子目录)包含magic的行
+　　grep -w pattern files：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)

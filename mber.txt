@@ -1,0 +1,17 @@
+需求文档：https://www.tapd.cn/23718031/prong/stories/stories_list?left_tree=1
+需求原型（高保真）：https://pro.modao.cc/app/e9df546d567096c2531c847d367da4204ba82d23#screen=s11678d5894022f90a44b29
+开发文档：https://drive.wps.cn/team/455688087?from=docs
+
+代码code：https://mber.coding.net/p/mber
+本地测试：http://localhost:8020/swagger-ui.html
+	开发：http://api.zhuozhimeng.com
+	测试：http://api.zhuozhimeng.cn
+
+
+项目打包：gradlew clean :webapp:bootJar -Pfull	
+	
+开发库：rm-wz976uge29vu631ka9o.mysql.rds.aliyuncs.com ：mber_rw ：jKHKMhkd#Ljf6Y
+测试库：rm-wz976uge29vu631ka9o.mysql.rds.aliyuncs.com ：3306 ：mber_test ：jLUklRkd#9LK
+
+开发环境地址：47.106.96.80/root/MhdfY7#jfQ&hkdjf6K
+测试环境地址: 120.79.5.55/root/MhkdY7#jfQ&hjfLd

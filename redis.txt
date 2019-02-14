@@ -1,0 +1,72 @@
+Redis：单线程
+一：五种储存数据类型
+1、String字符串
+1)set key value、mset key1 value1 key2 value2 ...
+  get key、mget key1 key2 ...
+  del key1 key2 ...
+  incr key、incrby key increment
+  decr key、decrby key increment
+  setex key seconds value(多长时间(seconds)后自动清除)
+  setnx key value(key不存在时设置值value)
+  strlen key(key对应value的字符长度)
+  getrange key start end(获取value的子字符)
+  getset key value(设置key的新value并返回旧value)
+2)incr、decr是原子操作，可用来实现计数器
+
+2、List列表
+1)lpush key value1 value2 ...(在头部第一个位置插入)
+  rpush key value1 value2 ...(在尾部最后插入)
+  lrange key start end(获取范围内的值)
+  lpop(从头部删除一个元素)
+  rpop(从尾部弹出一个元素)
+  rpoplpush key1 key2(从一个list的尾部弹出一个元素插入到另一个list，原子性)
+  llen key(获取列表长度)
+  lrem key count value(删除count个value)
+  ltrim key start end(保留start至end之间的数据)
+  
+3、Hash哈希
+1)hset key field value、hget key field、hincrby key field increment(无hincr/hdecr/hdecrby)
+  hgetall key(指定key中的键值对列表)
+  hkeys key(获取指定key中的键列表)
+  hvals key(获取指定key中的值列表)
+  hdel key field(删除)
+  hexists key field(是否存在field)
+  hmget key field1 field2 ...(获取值)
+  hmset key field1 value1 field2 value2 ...(设置多个field值)
+  hsetnx key field value(只有在field不存在时设置值)
+  
+4、Set集合
+1)sadd key member ...、scard key(集合元素个数)、sismember key member(是否存在)
+  smembers key
+  srem key member1 member2 ...(删除)
+  sdiff key1 key2(两个集合的差集)
+  sdiffstore destination key1 key2(将集合key1、key2差集存入destination集合)
+  sinter key1 key2(两个集合的交集)
+  sinterstore destination key1 key2(将集合key1、key2交集存入destination集合)
+  sunion key1 key2(两个集合的并集)
+  sunionstore destination key1 key2(将集合key1、key2并集存入destination集合)
+  
+5、sortedSet有序集合
+1)zadd key score1 member1 score2 member2 ...
+  zrem key member1 member2 ...
+  zcard key(成员数)
+  zcount key min max(计算指定区间分数内的成员数)
+  zrange key start end(正序)
+  zrevrange key start end(倒序)
+  zrangebyscore key min max(通过score返回指定区间的数据)
+  zrank key member(正序member的下标，从0开始)
+  zrevrank key member(倒序member的下标，从0开始)
+  zincrby key increment member(修改member的score，以increment增长)
+  zscore key member(获取指定member的score)
+  
+二、key基本操作命令
+del key(删除key)
+exists key(是否存在)
+keys pattern(查找符合给定模式pattern的key)
+expire key seconds(设置key过期时间)
+expireat key timestamp(设置过期时间，指定时间戳)
+persist key(移除key的过期时间，持久化)
+pttl key(返回key的剩余过期时间，以毫秒)
+ttl key(返回key的剩余过期时间，以秒)
+type key(返回key对应value的类型)
+move key db(将当期数据库的key移到库db)
