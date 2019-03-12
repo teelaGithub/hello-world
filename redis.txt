@@ -36,7 +36,7 @@ Redis：单线程
   hsetnx key field value(只有在field不存在时设置值)
   
 4、Set集合
-1)sadd key member ...、scard key(集合元素个数)、sismember key member(是否存在)
+1)sadd key member1 ...、scard key(集合元素个数)、sismember key member(是否存在)
   smembers key
   srem key member1 member2 ...(删除)
   sdiff key1 key2(两个集合的差集)

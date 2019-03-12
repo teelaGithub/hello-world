@@ -199,3 +199,96 @@ var：存放着在不断扩充着的东西，我们习惯将那些经常被修�
 　　grep magic /usr/src：显示/usr/src目录下的文件(不含子目录)包含magic的行
 　　grep -r magic /usr/src：显示/usr/src目录下的文件(包含子目录)包含magic的行
 　　grep -w pattern files：只匹配整个单词，而不是字符串的一部分(如匹配’magic’，而不是’magical’)
+
+36、su：变更为其他使用者的身份
+例：su [-] username: '-' 这个字符的作用是，加上后会初始化当前用户的各种环境变量
+37、sudo：允许一个已授权用户以超级用户或者其它用户的角色运行一个命令
+注：-b  在后台执行指令。
+	-h  显示帮助。
+	-H  将HOME环境变量设为新身份的HOME环境变量。
+	-k  结束密码的有效期限，也就是下次再执行sudo时便需要输入密码。
+	-l  列出目前用户可执行与无法执行的指令。
+	-p  改变询问密码的提示符号。
+	-s  执行指定的shell。
+	-u  <用户>  以指定的用户作为新的身份。若不加上此参数，则预设以root作为新的身份。
+	-v  延长密码有效期限5分钟。
+	-V  显示版本信息。
+	-S  从标准输入流替代终端来获取密码
+例：sudo -u root ls 指定用户执行命令
+
+38、rpm：打包、安装、查询、升级、卸载、校验、数据库管理(RPM无法解决软件包的依赖关系)
+注：-i：表示安装
+	-v, -vv, -vvv：表示详细信息
+	-h：以"#"号显示安装进度
+	-q：查询指定包名
+	-e：卸载指定包名
+	-U：升级软件，若未软件尚未安装，则安装软件
+	-F：升级软件
+	-V：对RPM包进行验证
+	-p: 对未安装的RPM包查询信息(rpm -qpi )
+	--nodeps：忽略依赖关系
+	--query：查询指定包名。同-q选项
+	--hash：同-h
+	--install：表示安装，同-i选项
+	--test：仅作测试，不真正执行，可用于测试安装，测试卸载
+	--replacepkgs：重新安装。替换原有的安装
+	--force：忽略软件包及文件的冲突
+	--initdb：新建RPM的数据库
+	--rebuilddb：重建RPM的数据库
+	--percent：以百分比的形式输出安装的进度
+例：RPM包的查询：
+	rpm -q：查询某一个RPM包是否已安装
+	rpm -qi：查询某一个RPM包的详细信息
+	rpm -ql：列出某RPM包中所包含的文件。
+	rpm -qf：查询某文件是哪个RPM包生成的。
+	rpm -qa：列出当前系统所有已安装的包
+	
+39、yum：在安装RPM时，会从服务器下载相应包，且缓存在本地(可以从指定的服务器自动下载RPM包并且安装，可以自动处理依赖性关系)
+例：yum list all: 获取yum仓库中所有的包信息(yum list mysql*)
+	yum list install: 只显示已安装的包
+	yum list available: 可安装的包
+	yum list updates: 查看所有可更新的包
+	yum list extras: 显示不属于任何仓库的，额外的包
+	yum search 查询名: 模糊匹配搜索
+	yum repo list: 查看当前能够使用的yum仓库
+	yum repo list all/enabled/disabled: 显示所有/可用/禁用仓库
+	yum info 包名: 显示软件包的摘要信息，类似rpm -qi 包名
+	yum clean [ packages | metadata | expire-cache | rpmdb | plugins | all ]: 清空本地yum的缓存
+	yum makecache: 手动在本地建立缓存(yum客户端会下载远程yum的文件，在本地生成缓存)
+	yum [-y] install 包1 包2 ... 包n: -y表示yes直接安装
+	yum [-y] reinstall 包1 包2 ... 包n: 重新安装软包
+	yum update 包1 包2 ... 包n: 升级软件包
+	yum update-to 包-版本号: 升级软件包，可以指定版本号
+	yum remove 包1 包2 ... 包n: 卸载软件包
+	yum history: 查看此前安装卸载等操作历史
+	
+40、df: 列出文件系统的整体磁盘使用量
+注：-a：列出所有的文件系统，包括系统特有的/proc等文件系统
+	-k：以KB的容量显示各文件系统
+	-m：以MB的容量显示各文件系统
+	-h：以人们较易阅读的GB,MB,KB等格式自行显示
+	-H：以M=1000K替代M=1024K的进位方式
+	-T：连同该分区的文件系统名称（例如ext3）也列出
+	-i：不用硬盘容量，而以inode的数量来显示
+例：df -h [目录文件]: 将容量结果以易读的容量格式显示出来
+	df -aT: 将系统内的所有特殊文件格式及名称都列出来
+	
+41、du：评估文件系统的磁盘使用量（常用于评估目录所占容量）
+注：-a : 列出所有的文件与目录容量，因为默认仅统计目录下面的文件量而已
+	-h : 以人们较易读的容量格式（G/M）显示
+	-s : 列出总量，而不列出每个个别的目录占用了容量
+	-S : 不包括子目录下的总计，与-s有点差别
+	-k : 以KB列出容量显示
+	-m : 以MB列出容量显示
+例：du -sm /*: 检查根目录下面每个目录所占用的容量
+
+42、fdisk: 磁盘分区
+注：p: 列出分区表
+	n: 新建分区
+	d：删除一个分区
+	q：退出不保存
+	w：把分区写进分区表，保存并退出
+例：fdisk /dev/sda: 将该磁盘进行分区
+	(①新建分区fdisk ②同步分区partprobe[没此步骤后面格式化会报错] ③格式化mkfs.ext3 /dev/sda3 ④挂载-mkdir /sda3创建挂载目录,mount /dev/sda3 /sda3挂载)
+	
+	
