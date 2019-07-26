@@ -1,0 +1,6 @@
+进入mysql交互界面：
+mysql -uroot -ppassword
+
+设置远程访问
+grant all privileges on *.* to 'root'@'%' identified by 'password' with grant option;
+flush privileges;

@@ -1,3 +1,3 @@
 # Notes
 一些笔记，持续补充...
-mysql.txt是Linux下部署Java、Tomcat、MySQL的简单过程
+Linux_java.txt是Linux下部署Java、Tomcat、MySQL的简单过程

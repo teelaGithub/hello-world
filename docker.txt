@@ -1,5 +1,23 @@
 ctrl+p+q    退出容器且不会关闭容器
+docker rm mysql 删除容器
 docker ps -a    查看所有容器
 docker images ls    查看镜像
 docker exec -it redis(容器名) redis-cli    进入docker的redis容器客户端
 docker exec -it mysql bash  进入docker的mysql交互界面
+
+
+---云枢ehr环境配置---
+基础目录：/data/cloudpivot/program/
+1.安装jdk：yum install java
+2.安装docker：yum install docker
+    开机启动：service docker start/systemctl start docker
+             chkconfig docker on
+3.安装zookeeper：docker run --name zk -p2181:2181 --restart=always -d zookeeper:latest
+4.安装Nginx：docker run --name nginx -p 80:80 -p 443:443 -v /data/cloudpivot/program/frontEnd:/usr/share/nginx/html
+            -v /data/cloudpivot/middleware/nginx/conf/nginx.conf:/etc/nginx/nginx.conf --privileged=true
+            -v /data/cloudpivot/middleware/nginx/log:/var/log/nignx
+            -v /data/cloudpivot/middleware/nginx/ssl/:/etc/nginx/ssl/:rw  --restart=always -d nginx:latest
+5.安装Redis：docker run --name redis -p6379:6379 --restart=always -d redis:4-alpine3.8 --requirepass "H3yuncom"
+6.安装MySQL：docker run -itd --name mysql -v /data/cloudpivot/middleware/mysql/mysql-data/:/var/lib/mysql
+            -v /data/cloudpivot/middleware/mysql/conf/my.cnf:/etc/mysql/my.cnf --privileged=true
+            -e MYSQL_ROOT_PASSWORD=test123456 -p 3306:3306 --restart=always mysql:5.7
