@@ -1,0 +1,5 @@
+ctrl+p+q    退出容器且不会关闭容器
+docker ps -a    查看所有容器
+docker images ls    查看镜像
+docker exec -it redis(容器名) redis-cli    进入docker的redis容器客户端
+docker exec -it mysql bash  进入docker的mysql交互界面

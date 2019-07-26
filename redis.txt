@@ -1,5 +1,8 @@
 Redis：单线程
-一：五种储存数据类型
+一：进入Redis客户端
+redis-cli -h 127.0.0.1 -p 6379 -a password
+
+二：五种储存数据类型
 1、String字符串
 1)set key value、mset key1 value1 key2 value2 ...
   get key、mget key1 key2 ...
@@ -59,7 +62,7 @@ Redis：单线程
   zincrby key increment member(修改member的score，以increment增长)
   zscore key member(获取指定member的score)
   
-二、key基本操作命令
+三、key基本操作命令
 del key(删除key)
 exists key(是否存在)
 keys pattern(查找符合给定模式pattern的key)
