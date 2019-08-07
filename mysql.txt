@@ -4,3 +4,5 @@ mysql -uroot -ppassword
 设置远程访问
 grant all privileges on *.* to 'root'@'%' identified by 'password' with grant option;
 flush privileges;
+
+show variables like '%datadir%';    查询数据库data目录

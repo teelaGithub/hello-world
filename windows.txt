@@ -1,0 +1,2 @@
+sc delete service-name  删除服务
+net start/stop/restart mysql    启动、停止、重启服务
